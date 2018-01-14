@@ -4,21 +4,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Rocking_App
+namespace EnvironmentDetails
 {
     class Program
     {
-        static void Main(string[] args)
+        static void ShowEnvironmentDetails()
         {
-            Console.Title = "Welcome to Rock";
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.BackgroundColor = ConsoleColor.Gray;
-            Console.WriteLine("------------------------");
-            Console.WriteLine("     ROCK ROCK ROCK     ");
-            Console.WriteLine("------------------------");
-            Console.BackgroundColor = ConsoleColor.White;
+            // get drives and info about computer
+            foreach (string drive in Environment.GetLogicalDrives())
+                Console.WriteLine("Drive: {0}", drive);
+
+            Console.WriteLine("OS: {0}", Environment.OSVersion);
+            Console.WriteLine("Processor: {0}", Environment.ProcessorCount);
+            Console.WriteLine("NET Version: {0}", Environment.Version);
 
             Console.ReadLine();
+        }
+
+        static void getNameAndAge()
+        {
+            Console.WriteLine("Name: ");
+            string name = Console.ReadLine();
+            Console.WriteLine("Age: ");
+            string age = Console.ReadLine();
+
+            ConsoleColor oneColor = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            Console.WriteLine("Hi {0}, you're {1} years old??", name,age);
+
+            Console.ForegroundColor = oneColor;
+        }
+
+        static int Main(string[] args)
+        {
+            // Get computer data
+            ShowEnvironmentDetails();
+
+            // get name and age
+            getNameAndAge();
+
+            Console.ReadLine();
+            return -1;
         }
     }
 }
