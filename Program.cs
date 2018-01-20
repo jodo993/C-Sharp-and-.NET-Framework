@@ -3,49 +3,47 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections;
 
-namespace EnvironmentDetails
+namespace HashTableSearch
 {
     class Program
     {
-        static void ShowEnvironmentDetails()
+        static Hashtable userSearchHashTable;
+
+        static void Main(string[] args)
         {
-            // get drives and info about computer
-            foreach (string drive in Environment.GetLogicalDrives())
-                Console.WriteLine("Drive: {0}", drive);
+            userSearchHashTable = new Hashtable();
 
-            Console.WriteLine("OS: {0}", Environment.OSVersion);
-            Console.WriteLine("Processor: {0}", Environment.ProcessorCount);
-            Console.WriteLine("NET Version: {0}", Environment.Version);
+            Console.WriteLine("Type in a sentence: ");
+            string sentence = Console.ReadLine();
 
-            Console.ReadLine();
-        }
+            Console.WriteLine("Total Words: " + sentence.Split().Length);
 
-        static void getNameAndAge()
-        {
-            Console.WriteLine("Name: ");
-            string name = Console.ReadLine();
-            Console.WriteLine("Age: ");
-            string age = Console.ReadLine();
+            int i = 1;
+            foreach (string word in sentence.Split())
+            {
+                if (userSearchHashTable.Contains(word))
+                    userSearchHashTable[word] = i + 1;
+                else
+                {
+                    userSearchHashTable.Add(word, i);
+                }
+            }
 
-            ConsoleColor oneColor = Console.ForegroundColor;
-            Console.ForegroundColor = ConsoleColor.Red;
+            foreach (DictionaryEntry entry in userSearchHashTable)
+            {
+                Console.WriteLine("Word: " + entry.Key + " Appearance: " + entry.Value);
+            }
 
-            Console.WriteLine("Hi {0}, you're {1} years old??", name,age);
+            //string matchOne = "My computer wont turn on";
+            //string matchTwo = "Chromebook screen is black";
+            //string matchThree = "Lexia keeps asking for cookies";
 
-            Console.ForegroundColor = oneColor;
-        }
-
-        static int Main(string[] args)
-        {
-            // Get computer data
-            ShowEnvironmentDetails();
-
-            // get name and age
-            getNameAndAge();
-
-            Console.ReadLine();
-            return -1;
+            //foreach(DictionaryEntry word in userSearchHashTable)
+            //{
+            //    if ()
+            //}
         }
     }
 }
